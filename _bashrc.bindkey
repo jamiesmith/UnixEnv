@@ -1,0 +1,5 @@
+
+bind '"\e[18~": yank-last-arg'
+bind '"\e[19~": history-search-backward'
+bind '"\e[20~": history-search-forward'
+

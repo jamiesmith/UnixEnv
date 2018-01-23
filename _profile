@@ -1,0 +1,170 @@
+#!/bin/ksh
+#
+env -i
+
+ECHO=echo
+
+function sourceIfPresent
+{
+    file="$1"
+    
+    if [ -s "$file" ]
+    then
+        echo "sourcing shared file $file"
+        source "$file"
+    fi
+}
+
+function dotIfPresent
+{
+    file=$1
+    if [ -s "$file" ]
+    then
+	echo "dotting shared file $file"
+	. "$file"
+    fi
+}
+
+sourceIfPresent "$HOME/.shell.functions"
+
+Setenv GIT_ROOT ~/Projects/GitRepo
+# Figure out if this is a dropbox or home setup
+#
+pathToProfile=$(readlink ~/.profile)
+Setenv UNIX_ENV_DIR $(dirname $pathToProfile)
+
+# This is causing problems, need to rething it
+#
+#checkUpToDate
+
+#####################################################
+# Environment Variables
+#####################################################
+
+Setenv  USER             $(whoami)
+Setenv  EDITOR           emacs
+Setenv  PAGER            less
+Setenv  BLOCKSIZE        1k
+
+# This one is for tar and osx files
+#
+Setenv  COPYFILE_DISABLE true
+ 
+# append to the history file, don't overwrite it
+#
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+#
+Setenv HISTCONTROL ignoredups:erasedups
+Setenv HISTSIZE 10000
+Setenv HISTFILESIZE 20000
+Setenv HISTIGNORE 'bg:fg:history'
+# Not sure this one is needed
+#
+Setenv HISTTIMEFORMAT "%X    "
+shopt -s cmdhist
+
+Setenv PATH "."
+
+AddpathIfPresent ~/Dropbox/bin
+AddpathIfPresent ~/Dropbox/findgrep
+AddpathIfPresent ~/bin/findgrep
+Addpath ${UNIX_ENV_DIR}/bin
+
+Addpath ~/bin
+
+Addpath /usr/local/bin
+AddpathIfPresent /usr/local/sbin
+AddpathIfPresent $HOME/.local/bin
+
+Addpath /bin 
+Addpath /usr/bin 
+Addpath /usr/sbin 
+
+Addpath /etc        
+Addpath /sbin 
+AddpathIfPresent ~/Library/Python/2.7/bin
+AddpathIfPresent /opt/X11/bin
+
+#####################################################
+# ManPath Variables
+#####################################################
+
+Addman          /usr/share/man 
+
+#####################################################
+# LD_LIBRARY_PATH Variables
+#####################################################
+
+# Environment
+stty erase ^h
+
+export PS1="\[$(tput bold)\]\[\e[7m\]\u@\h\[$(tput sgr0)\][\t]:\[$(tput bold)\]\w \\$ >\[$(tput sgr0)\]\[$(tput sgr0)\]"
+
+set -o emacs
+
+#Make the keyboard cursor keys work
+alias __A=""
+alias __B=""
+alias __C=""
+alias __D=""
+
+alias ls="ls -F"
+alias l="ls -l"
+alias md="mkdir"
+alias me="ps -fu $USER"
+alias p="more -c"
+alias clean="rm *~"
+alias h="history"
+alias j="jobs"
+alias tt="exec tcsh"
+alias s="sw_sccs"
+alias xsltproc=$SW_HOME/3rdparty/sol/libxslt/1.1.12_64/bin/xsltproc
+
+sourceIfPresent "$HOME/.bashrc.alias"
+sourceIfPresent "$HOME/.bashrc.bindkey"
+sourceIfPresent "$HOME/.elastic_demos"
+sourceIfPresent "$HOME/.rvm/scripts/rvm"
+sourceIfPresent "$HOME/.bashrc.alias"
+sourceIfPresent "$HOME/.bashrc.bindkey"
+AddpathIfPresent $HOME/.rvm/bin
+
+bind "set completion-ignore-case on"
+bind "set show-all-if-ambiguous on"
+
+#if [ -f $HOME/.Xdefaults ]
+#then
+#    if [ ! -z $DISPLAY ]
+#    then
+#	echo LOADING XDEF> $HOME/log
+#        xrdb $HOME/.Xdefaults      # Load Users X11 resource database
+#    fi
+#fi
+
+sourceIfPresent .amazon_aws
+complete -C aws_completer aws
+
+sourceIfPresent ~/.secrets
+sourceIfPresent /etc/bash_completion
+brewSourceIfPresent etc/bash_completion
+brewSourceIfPresent etc/bash_completion.d/vagrant
+
+if [ -d $HOME/go ]
+then
+    SetenvDir GOPATH $HOME/go
+    SetenvDir GOBIN $GOPATH/bin
+    AddpathIfPresent $GOBIN
+    AddpathIfPresent /usr/local/opt/go/libexec/bin
+fi
+
+Setenv VAGRANT_DEFAULT_PROVIDER vmware_fusion
+
+Setenv NVM_DIR "$HOME/.nvm"
+sourceIfPresent "$NVM_DIR/nvm.sh"
+sourceIfPresent "$NVM_DIR/bash_completion"
+
+# Automatic Version Switching for Node.js
+# This never works, but at least you know if it is off
+#
+sourceIfPresent "$HOME/.avn/bin/avn.sh"

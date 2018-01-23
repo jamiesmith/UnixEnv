@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+
+alias new=newf
+alias h="history 100"
+alias j="jobs -l"
+
+alias pd="pushd"
+alias po="popd"
+alias d="dirs -l"
+
+alias md="mkdir"
+alias rd="rm -r"
+alias p="more -c"
+alias me="ps -fu $USER"
+
+alias clean="rm -f *~ .*~"
+
+alias ups="usr/ucb/ps -aguxww"
+alias ugrep="usr/ucb/ps -aguxww| grep $USER |grep "
+alias hgrep="history 1000 | grep "
+alias nal="netstat -na | grep LISTEN"
+
+alias xe="chmod +x"
+
+alias emx="emacs -nw"
+
+alias ww="chmod +w"
+
+# posterity, so I remember the scd command
+#
+# alias gs="scd generic sol"
+# alias sg="scd sol generic"
+# alias st="scd src test"
+# alias ts="scd test src"
+
+alias cd.="cd .."
+alias cd..="cd .."
+alias cd...="cd ../.."
+alias cd....="cd ../../.."
+alias cd.....="cd ../../../.."
+
+# Standard LS aliases
+#
+alias ls="ls -F"
+alias l="ls -lh"
+alias la="ls -la"
+alias ll="ls -lhA"
+
+alias tg="treegrep"
+alias gg="treegrep -x go"
+alias pbj="pbpaste | jq . --sort-keys"
+alias sha256="shasum -a 256"
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]
+then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto -F'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Some tail -f aliases (Tailiases?)
+alias tf="tail -f"
+
+alias dtf="docker tail -f --lines 30"
+docker_alias_completion_wrapper __docker_complete_containers_running dtf
+
+function deb { docker exec -it $@ bash ;}
+docker_alias_completion_wrapper __docker_complete_containers_running deb
+
+                                                                       
+

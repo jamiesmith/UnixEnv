@@ -1,0 +1,47 @@
+#!/bin/bash
+touch /tmp/foo
+prefix=""
+suffix=""
+verbose=""
+url=""
+
+while getopts "np:s:uv" option
+do
+	case $option in
+		n)
+			suffix="\n"
+			;;
+		p)
+			prefix="$OPTARG"
+			;;
+		s)
+			suffix="$OPTARG"
+			;;
+		u)
+			rawurl=$(pbpaste -Prefer rtf)
+			url=" ($rawurl)"
+			;;
+		v)
+			verbose="YEP"
+			;;
+	esac
+done
+
+shift `expr $OPTIND - 1`
+
+
+
+pbpaste -Prefer txt | \
+    awk -v prefix="${prefix}" \
+        -v url="$URL" \
+        -v suffix="${suffix}" \
+        '{printf("%s%s%s%s", prefix, $0, url, suffix)}' | \
+    sed s/[”“]/'"'/g | \
+	pbcopy 
+
+if [ -n "$verbose"]
+then
+	echo "##################################################"
+	pbpaste
+	echo "##################################################"
+fi

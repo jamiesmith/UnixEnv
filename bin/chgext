@@ -1,0 +1,14 @@
+#!/bin/sh
+from=$1
+
+if [ $# -gt 1 ]
+then
+    to=$2
+else
+    to=""
+fi
+
+for f in *${from}
+do
+    mv "$f" "${f%${from}}${to}"
+done 

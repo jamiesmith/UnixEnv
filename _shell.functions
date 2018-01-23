@@ -1,0 +1,215 @@
+function brewSourceIfPresent
+{
+    if [ $(which brew) ] 
+    then
+        file="$(brew --prefix)/$1"
+
+        if [ -s "$file" ]
+        then
+            echo "sourcing shared brew file $file"
+            source "$file"
+        fi
+    fi
+}
+
+function SetenvDir
+{ 
+	eval "$1='$2' export $1";
+	if [ ! -d $2 ]
+	then
+		$ECHO "$0: SetenvDir: warning: $2 does not exist"
+	fi
+}
+
+function Setenv
+{ 
+	eval "$1='$2' export $1";
+}
+
+function Addpath
+{
+	PATH=$PATH:$1 export PATH
+	if [ ! -d $1 ]
+	then
+		$ECHO "$0: Addpath: warning: $1 does not exist"
+	fi
+}
+
+function AddpathIfPresent
+{
+	if [ -d $1 ]
+	then
+    	PATH=$PATH:$1 export PATH
+	fi
+}
+
+function Addlpath
+{
+	LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$1 export LD_LIBRARY_PATH
+	if [ ! -d $1 ]
+	then
+		$ECHO "$0: Addlpath: warning: $1 does not exist"
+	fi
+}
+
+function AddClassPath
+{
+	CLASSPATH=$CLASSPATH:$1 export CLASSPATH
+
+	if [ ! -f $1 ]
+	then 
+		$ECHO "$0: AddClassPath: warning: $1 does not exist"
+	fi
+}
+
+function Addman
+{
+	MANPATH=$MANPATH:$1 export MANPATH
+
+	if [ ! -d $1 ]
+	then
+		$ECHO "$0: Addman: warning: $1 does not exist"
+	fi
+}
+
+function newf
+{
+	ls -lthF "$@" | head -25
+}
+
+function mcd
+{
+    mkdir -p $1
+    cd $1
+}
+
+function scd
+{
+	### alias scd="set mydir=`pwd`;cd `echo $mydir | sed "s/\!:1/\!:2/"`"### alias mcd="mkdir -p \!* ; cd \!*"
+	mydir=$(pwd)
+	newdir=$(echo $mydir | sed "s/$1/$2/")
+
+	echo cd $newdir
+	cd $newdir
+}
+
+# http://transfer.sh
+#
+function transfer
+{
+    if [ $# -eq 0 ]
+    then
+		echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"
+		return 1
+    fi 
+    tmpfile=$( mktemp -t transferXXX )
+    if tty -s
+    then
+		basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g')
+		curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile
+    else 
+		curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile 
+    fi
+    cat $tmpfile
+	echo ""
+    rm -f $tmpfile
+}
+
+function cg
+{
+    cd "${GIT_ROOT}/$@"
+}
+
+function usage
+{
+    if command -v gsort >/dev/null 2>&1
+    then
+	SORT=gsort
+    else
+	SORT=cat
+    fi
+
+    du -hcs $1* | $SORT
+}
+
+
+function pg
+{
+    pushd "${GIT_ROOT}/$@"
+}
+
+function _cg
+{
+    savedir="$PWD"
+    local projdir=${GIT_ROOT}
+    cd "$projdir"
+
+    local cur=$(_get_cword)
+    _filedir
+    PWD="$savedir"    
+}
+
+function checkUpToDate
+{
+    local status
+    
+    local today=$(date "+%d")
+    local marker=$HOME/.unixEnvStatus
+    local wrapper=""
+    
+    
+    # if the marker is older than a day
+    #
+    local count=$( (find $marker -mtime 1 | wc -l) 2> /dev/null )
+
+    if [ ! -f "$marker" ] || [ ${count} -gt 0 ]
+    then
+        cd $UNIX_ENV_DIR
+        status="Unix Env $(${UNIX_ENV_DIR}/bin/gitstatus.sh)"
+        cd - > /dev/null
+        
+        if [ $? -ne 0 ]
+        then
+            wrapper="#######################################################\n"
+        fi
+
+	rm $marker        
+        [ -n "$wrapper" ] && echo $wrapper > $marker
+        echo $status >> $marker
+        [ -n "$wrapper" ] && echo $wrapper >> $marker
+
+    fi
+    cat $marker
+}
+
+complete -F _cg cg pg -o nospace
+
+function docker_alias_completion_wrapper 
+{
+  local completion_function="$1";
+  local alias_name="$2";
+
+  local func=$(cat <<EOT
+    # Generate a new completion function name
+    function _$alias_name() {
+        # Start off like _docker()
+        local previous_extglob_setting=\$(shopt -p extglob);
+        shopt -s extglob;
+
+        # Populate \$cur, \$prev, \$words, \$cword
+        _get_comp_words_by_ref -n : cur prev words cword;
+
+        # Declare and execute
+        declare -F $completion_function >/dev/null && $completion_function;
+
+        eval "\$previous_extglob_setting";
+        return 0;
+    };
+EOT
+  );
+  eval "$func";
+
+  # Register the alias completion function
+  complete -F _$alias_name $alias_name
+}
+

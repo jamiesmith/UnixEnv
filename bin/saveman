@@ -1,0 +1,25 @@
+#!/bin/ksh
+
+while getopts "s:" option
+do
+	case $option in
+		s)
+			section="-s $OPTARG"
+			;;
+	esac
+done
+
+shift `expr $OPTIND - 1`
+
+echo "Saving the Manual Pages for" $1 ...
+
+DIR=$HOME/Dropbox/shared/mantext
+mkdir -p $DIR
+
+file=$DIR/$1
+
+if [ ! -f $file ]
+then
+	man $section $1 | col -b > $file
+fi
+emacs $file

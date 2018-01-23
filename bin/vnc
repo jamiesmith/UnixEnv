@@ -1,0 +1,13 @@
+#!/bin/ksh
+
+while getopts "d:" option
+do
+    case $option in 
+	d)
+	    port=:$((5900+$OPTARG))
+	    ;;
+    esac
+done
+shift $((${OPTIND} - 1)) 
+
+open vnc://$1.local${port}
