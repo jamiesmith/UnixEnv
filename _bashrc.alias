@@ -146,7 +146,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Some tail -f aliases (Tailiases?)
 alias tf="tail -f"
 
-alias dtl="docker logs -f --lines 30"
+alias dtl="docker logs --tail 30 --follow"
 docker_alias_completion_wrapper __docker_complete_containers_running dtl
 
 function deb { docker exec -it $@ bash ;}
