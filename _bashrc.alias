@@ -1,5 +1,80 @@
 #!/usr/bin/env bash
 
+##################################################
+# Custom completion_functions
+##################################################
+
+function docker_alias_completion_wrapper 
+{
+  local completion_function="$1";
+  local alias_name="$2";
+
+  local func=$(cat <<EOT
+    # Generate a new completion function name
+    function _$alias_name() {
+        # Start off like _docker()
+        local previous_extglob_setting=\$(shopt -p extglob);
+        shopt -s extglob;
+
+        # Populate \$cur, \$prev, \$words, \$cword
+        _get_comp_words_by_ref -n : cur prev words cword;
+
+        # Declare and execute
+        declare -F $completion_function >/dev/null && $completion_function;
+
+        eval "\$previous_extglob_setting";
+        return 0;
+    };
+EOT
+  );
+  eval "$func";
+
+  # Register the alias completion function
+  complete -F _$alias_name $alias_name
+}
+
+# Really need to figure out how to do this the "right" way
+#
+function __custom_cd
+{
+    savedir="$PWD"
+    local projdir="$1"
+    cd "$projdir"
+
+    local cur=$(_get_cword)
+    _filedir
+    PWD="$savedir"    
+}
+
+function _cg
+{
+    __custom_cd "${GIT_ROOT}"
+}
+
+function _ca
+{
+    __custom_cd "${SA_DEMO_DIR:-GIT_ROOT}"
+}
+
+##################################################
+# Not exactly "aliases" but used like them
+##################################################
+
+function cg
+{
+    cd "${GIT_ROOT}/$@"
+}
+
+function pg
+{
+    pushd "${GIT_ROOT}/$@"
+}
+
+function ca
+{
+    cd "${SA_DEMO_DIR}/$@"
+}
+
 alias new=newf
 alias h="history 100"
 alias j="jobs -l"
@@ -78,4 +153,6 @@ function deb { docker exec -it $@ bash ;}
 docker_alias_completion_wrapper __docker_complete_containers_running deb
 
                                                                        
+complete -F _cg cg pg -o nospace
+complete -F _ca ca -o nospace
 

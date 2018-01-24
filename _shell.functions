@@ -115,11 +115,6 @@ function transfer
     rm -f $tmpfile
 }
 
-function cg
-{
-    cd "${GIT_ROOT}/$@"
-}
-
 function usage
 {
     if command -v gsort >/dev/null 2>&1
@@ -130,28 +125,6 @@ function usage
     fi
 
     du -hcs $1* | $SORT
-}
-
-
-function pg
-{
-    pushd "${GIT_ROOT}/$@"
-}
-
-function cs
-{
-    cd "${SA_DEMO_DIR}/$@"
-}
-
-function _cg
-{
-    savedir="$PWD"
-    local projdir=${GIT_ROOT}
-    cd "$projdir"
-
-    local cur=$(_get_cword)
-    _filedir
-    PWD="$savedir"    
 }
 
 function checkUpToDate
@@ -186,35 +159,3 @@ function checkUpToDate
     fi
     cat $marker
 }
-
-complete -F _cg cg pg -o nospace
-
-function docker_alias_completion_wrapper 
-{
-  local completion_function="$1";
-  local alias_name="$2";
-
-  local func=$(cat <<EOT
-    # Generate a new completion function name
-    function _$alias_name() {
-        # Start off like _docker()
-        local previous_extglob_setting=\$(shopt -p extglob);
-        shopt -s extglob;
-
-        # Populate \$cur, \$prev, \$words, \$cword
-        _get_comp_words_by_ref -n : cur prev words cword;
-
-        # Declare and execute
-        declare -F $completion_function >/dev/null && $completion_function;
-
-        eval "\$previous_extglob_setting";
-        return 0;
-    };
-EOT
-  );
-  eval "$func";
-
-  # Register the alias completion function
-  complete -F _$alias_name $alias_name
-}
-
