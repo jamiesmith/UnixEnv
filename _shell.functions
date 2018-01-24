@@ -138,6 +138,11 @@ function pg
     pushd "${GIT_ROOT}/$@"
 }
 
+function cs
+{
+    cd "${SA_DEMO_DIR}/$@"
+}
+
 function _cg
 {
     savedir="$PWD"
