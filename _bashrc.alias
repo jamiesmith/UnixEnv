@@ -18,7 +18,7 @@ alias clean="rm -f *~ .*~"
 alias ups="usr/ucb/ps -aguxww"
 alias ugrep="usr/ucb/ps -aguxww| grep $USER |grep "
 alias hgrep="history 1000 | grep "
-alias nal="netstat -na | grep LISTEN"
+alias nsl="netstat -na | grep LISTEN"
 
 alias xe="chmod +x"
 
