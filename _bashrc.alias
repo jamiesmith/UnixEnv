@@ -33,27 +33,22 @@ EOT
   complete -F _$alias_name $alias_name
 }
 
+##################################################
 # Really need to figure out how to do this the "right" way
-#
-function __custom_cd
-{
-    savedir="$PWD"
-    local projdir="$1"
-    cd "$projdir"
+##################################################
 
-    local cur=$(_get_cword)
-    _filedir
-    PWD="$savedir"    
+function _cd_gitroot
+{
+    cd $GIT_ROOT
+    _cd $@ 
+    return 0
 }
 
-function _cg
+function _cd_sa_demo_dir
 {
-    __custom_cd "${GIT_ROOT}"
-}
-
-function _ca
-{
-    __custom_cd "${SA_DEMO_DIR:-GIT_ROOT}"
+    cd $SA_DEMO_DIR
+    _cd
+    cd - > /dev/null
 }
 
 ##################################################
@@ -73,6 +68,11 @@ function pg
 function ca
 {
     cd "${SA_DEMO_DIR}/$@"
+}
+
+function pa
+{
+    pd "${SA_DEMO_DIR}/$@"
 }
 
 alias new=newf
@@ -158,9 +158,8 @@ function deb { docker exec -it $@ bash ;}
 docker_alias_completion_wrapper __docker_complete_containers_running deb
 
 alias tunnels="ssh -f -N elastunnel"
-                                                                       
-complete -F _cg cg pg -o nospace
-complete -F _ca ca -o nospace
 
 alias emasc=emacs
 
+complete -F _cd_gitroot cg pg 
+complete -F _cd_sa_demo_dir ca pa -o nospace

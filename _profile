@@ -122,12 +122,12 @@ alias tt="exec tcsh"
 alias s="sw_sccs"
 alias xsltproc=$SW_HOME/3rdparty/sol/libxslt/1.1.12_64/bin/xsltproc
 
-sourceIfPresent "$HOME/.bashrc.alias"
 sourceIfPresent "$HOME/.bashrc.bindkey"
 sourceIfPresent "$HOME/.elastic_demos"
 sourceIfPresent "$HOME/.rvm/scripts/rvm"
-sourceIfPresent "$HOME/.bashrc.alias"
 sourceIfPresent "$HOME/.bashrc.bindkey"
+dotIfPresent "$HOME/.bashrc.alias"
+
 AddpathIfPresent $HOME/.rvm/bin
 
 bind "set completion-ignore-case on"
