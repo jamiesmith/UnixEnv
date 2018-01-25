@@ -147,7 +147,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 alias tf="tail -f"
 
 alias dtl="docker logs --tail 30 --follow"
-docker_alias_completion_wrapper __docker_complete_containers_running dtl
+docker_alias_completion_wrapper __docker_complete_containers_all dtl
 
 function deb { docker exec -it $@ bash ;}
 docker_alias_completion_wrapper __docker_complete_containers_running deb
@@ -156,3 +156,6 @@ alias tunnels="ssh -f -N elastunnel"
                                                                        
 complete -F _cg cg pg -o nospace
 complete -F _ca ca -o nospace
+
+alias emasc=emacs
+
