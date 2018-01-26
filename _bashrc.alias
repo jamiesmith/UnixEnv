@@ -56,7 +56,6 @@ custom_cd_alias ca $SA_DEMO_DIR
 custom_cd_alias cg $GIT_ROOT
 custom_cd_alias ce $UNIX_ENV_DIR
 
-
 function docker_alias_completion_wrapper 
 {
   local completion_function="$1";
