@@ -3,6 +3,13 @@
 ##################################################
 # Custom completion_functions
 ##################################################
+function _compopt_o_filenames
+{
+    # This isn't on ubuntu
+    type compopt &>/dev/null && compopt -o filenames 2>/dev/null || \
+        compgen -f /non-existing-dir/ >/dev/null
+}
+
 function custom_cd_alias
 {
     local alias_name="$1"
@@ -47,6 +54,8 @@ EOT
 
 custom_cd_alias ca $SA_DEMO_DIR
 custom_cd_alias cg $GIT_ROOT
+custom_cd_alias ce $UNIX_ENV_DIR
+
 
 function docker_alias_completion_wrapper 
 {
