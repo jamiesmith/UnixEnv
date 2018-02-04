@@ -1,0 +1,9 @@
+#!/bin/bash
+
+roons="office-roon"
+
+for roon in $roons
+do
+    temp=$(ssh $roon cputemp | cut -d= -f2)
+    echo "$roon: $temp"
+done
