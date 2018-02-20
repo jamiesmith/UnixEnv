@@ -2,4 +2,4 @@
 
 # Added that the mode needs to be 600 for the auth-key file
 #
-cat ~/.ssh/id_rsa.pub | ssh ${*} "cat - >> ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa.pub | ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ${*} "cat - >> ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys"
