@@ -146,6 +146,7 @@ sourceIfPresent .amazon_aws
 complete -C aws_completer aws
 
 sourceIfPresent ~/.secrets
+sourceIfPresent ~/Dropbox/.secrets.env
 sourceIfPresent /etc/bash_completion
 brewSourceIfPresent etc/bash_completion
 brewSourceIfPresent etc/bash_completion.d/vagrant
