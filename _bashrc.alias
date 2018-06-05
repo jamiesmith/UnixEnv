@@ -188,3 +188,6 @@ docker_alias_completion_wrapper __docker_complete_containers_running deb
 alias tunnels="ssh -f -N elastunnel"
 
 alias emasc=emacs
+alias be="bundle exec"
+alias topb="top -l 99 -n 20 -o cpu -ncols 17"
+alias fixcanvas="pbpaste  | sed $'s@|@\\\n|@g'|pbcopy ; pbpaste"

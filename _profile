@@ -124,11 +124,10 @@ alias xsltproc=$SW_HOME/3rdparty/sol/libxslt/1.1.12_64/bin/xsltproc
 
 sourceIfPresent "$HOME/.bashrc.bindkey"
 sourceIfPresent "$HOME/.elastic_demos"
-sourceIfPresent "$HOME/.rvm/scripts/rvm"
 sourceIfPresent "$HOME/.bashrc.bindkey"
 dotIfPresent "$HOME/.bashrc.alias"
 
-AddpathIfPresent $HOME/.rvm/bin
+eval "$(rbenv init -)"
 
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
@@ -169,3 +168,4 @@ sourceIfPresent "$NVM_DIR/bash_completion"
 # This never works, but at least you know if it is off
 #
 sourceIfPresent "$HOME/.avn/bin/avn.sh"
+

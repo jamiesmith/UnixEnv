@@ -73,6 +73,7 @@
 
 (setq auto-mode-alist (cons '("\.yml$"  . yaml-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\.yaml$" . yaml-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\.dash$" . yaml-mode) auto-mode-alist))
 
 (add-hook 'yaml-mode-hook
     (lambda ()
