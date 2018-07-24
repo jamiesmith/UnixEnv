@@ -169,7 +169,7 @@ sourceIfPresent "$NVM_DIR/bash_completion"
 #
 sourceIfPresent "$HOME/.avn/bin/avn.sh"
 
-sourceIfPresent "$HOME/.local"
+sourceIfPresent "$HOME/.local_env"
 
 # The next line updates PATH for the Google Cloud SDK.
 sourceIfPresent /Users/jamie/Downloads/google-cloud-sdk/path.bash.inc
