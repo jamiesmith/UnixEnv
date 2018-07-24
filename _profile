@@ -169,3 +169,10 @@ sourceIfPresent "$NVM_DIR/bash_completion"
 #
 sourceIfPresent "$HOME/.avn/bin/avn.sh"
 
+sourceIfPresent "$HOME/.local"
+
+# The next line updates PATH for the Google Cloud SDK.
+sourceIfPresent /Users/jamie/Downloads/google-cloud-sdk/path.bash.inc
+
+# The next line enables shell command completion for gcloud.
+sourceIfPresent /Users/jamie/Downloads/google-cloud-sdk/completion.bash.inc

@@ -153,6 +153,7 @@ alias ls="ls -F"
 alias l="ls -lh"
 alias la="ls -la"
 alias ll="ls -lhA"
+alias l1="ls -1"
 
 alias tg="treegrep"
 alias gg="treegrep -x go"
