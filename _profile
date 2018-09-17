@@ -176,3 +176,8 @@ sourceIfPresent /Users/jamie/Downloads/google-cloud-sdk/path.bash.inc
 
 # The next line enables shell command completion for gcloud.
 sourceIfPresent /Users/jamie/Downloads/google-cloud-sdk/completion.bash.inc
+
+sourceIfPresent /Users/jamie/google-cloud-sdk/path.bash.inc
+
+# The next line enables shell command completion for gcloud.
+sourceIfPresent /Users/jamie/google-cloud-sdk/completion.bash.inc

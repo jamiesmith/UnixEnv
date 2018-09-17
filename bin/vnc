@@ -9,5 +9,5 @@ do
     esac
 done
 shift $((${OPTIND} - 1)) 
-
-open vnc://$1.local${port}
+host=$(echo $1 | sed 's|homer|krypter|g')
+open vnc://${host}.local${port}

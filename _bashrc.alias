@@ -187,6 +187,7 @@ function deb { docker exec -it $@ bash ;}
 docker_alias_completion_wrapper __docker_complete_containers_running deb
 
 alias tunnels="ssh -f -N elastunnel"
+alias gcptunnel="ssh -f -N gcptunnel"
 
 alias emasc=emacs
 alias be="bundle exec"

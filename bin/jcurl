@@ -2,6 +2,6 @@
 
 [ -x "$(which jq)" ] || die_usage "ERROR: You need jq - try brew install jq or the linux equivalent"
 
-output=$(curl --silent $@)
+output=$(curl --silent "$@")
 
 echo $output | jq . || echo $output
