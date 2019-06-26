@@ -412,3 +412,4 @@
     (message "I found shebang"))
 
 
+(put 'upcase-region 'disabled nil)
