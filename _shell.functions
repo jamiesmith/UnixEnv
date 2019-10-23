@@ -9,8 +9,6 @@ function brewSourceIfPresent
             echo "sourcing shared brew file $file"
             source "$file"
         fi
-    else
-        echo Not Brewing
     fi
 }
 
