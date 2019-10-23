@@ -1,6 +1,6 @@
 function brewSourceIfPresent
 {
-    if [ $(which brew) ] 
+    if [ command -v brew >/dev/null 2>&1 ] 
     then
         file="$(brew --prefix)/$1"
 

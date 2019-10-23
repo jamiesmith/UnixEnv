@@ -128,7 +128,10 @@ sourceIfPresent "$HOME/.elastic_demos"
 sourceIfPresent "$HOME/.bashrc.bindkey"
 dotIfPresent "$HOME/.bashrc.alias"
 
-eval "$(rbenv init -)"
+if [ command -v rbenv >/dev/null 2>&1 ]
+then
+    eval "$(rbenv init -)"
+fi
 
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
