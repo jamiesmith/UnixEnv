@@ -130,8 +130,7 @@ dotIfPresent "$HOME/.bashrc.alias"
 
 # There's some weirdness going on - can't have this check inside the if.
 #
-command -v rbenv >/dev/null 2>&1
-if [ $? ] 
+if hash rbenv 2>/dev/null
 then
     eval "$(rbenv init -)"
 fi
@@ -191,7 +190,7 @@ sourceIfPresent /Users/jamie/google-cloud-sdk/path.bash.inc
 # The next line enables shell command completion for gcloud.
 sourceIfPresent /Users/jamie/google-cloud-sdk/completion.bash.inc
 
-if [ -x $(which helm) ]
+if hash helm 2>/dev/null
 then
     echo setting up helm completion
     source <(helm completion bash)

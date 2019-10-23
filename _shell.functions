@@ -1,9 +1,6 @@
 function brewSourceIfPresent
 {
-    # There's some weirdness going on - can't have this check inside the if.
-    #
-    command -v brew >/dev/null 2>&1
-    if [ $? ] 
+    if hash brew 2>/dev/null
     then
         file="$(brew --prefix)/$1"
 
