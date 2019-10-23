@@ -128,7 +128,10 @@ sourceIfPresent "$HOME/.elastic_demos"
 sourceIfPresent "$HOME/.bashrc.bindkey"
 dotIfPresent "$HOME/.bashrc.alias"
 
-if [ command -v rbenv >/dev/null 2>&1 ]
+# There's some weirdness going on - can't have this check inside the if.
+#
+command -v rbenv >/dev/null 2>&1
+if [ $? ] 
 then
     eval "$(rbenv init -)"
 fi

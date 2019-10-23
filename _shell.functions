@@ -1,6 +1,9 @@
 function brewSourceIfPresent
 {
-    if [ command -v brew >/dev/null 2>&1 ] 
+    # There's some weirdness going on - can't have this check inside the if.
+    #
+    command -v brew >/dev/null 2>&1
+    if [ $? ] 
     then
         file="$(brew --prefix)/$1"
 
@@ -9,6 +12,8 @@ function brewSourceIfPresent
             echo "sourcing shared brew file $file"
             source "$file"
         fi
+    else
+        echo Not Brewing
     fi
 }
 
