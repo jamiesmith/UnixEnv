@@ -45,7 +45,7 @@ Setenv  USER             $(whoami)
 Setenv  EDITOR           emacs
 Setenv  PAGER            less
 Setenv  BLOCKSIZE        1k
-
+Setenv  PGHOST           localhost
 # This one is for tar and osx files
 #
 Setenv  COPYFILE_DISABLE true
@@ -147,6 +147,7 @@ bind "set show-all-if-ambiguous on"
 
 sourceIfPresent .amazon_aws
 complete -C aws_completer aws
+complete -F _ssh vnc
 
 sourceIfPresent ~/.secrets
 sourceIfPresent ~/Dropbox/.secrets.env
@@ -186,3 +187,9 @@ sourceIfPresent /Users/jamie/google-cloud-sdk/path.bash.inc
 
 # The next line enables shell command completion for gcloud.
 sourceIfPresent /Users/jamie/google-cloud-sdk/completion.bash.inc
+
+if [ -x $(which helm) ]
+then
+    echo setting up helm completion
+    source <(helm completion bash)
+fi
