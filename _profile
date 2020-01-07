@@ -68,6 +68,7 @@ shopt -s cmdhist
 Setenv PATH "."
 
 AddpathIfPresent ~/Dropbox/bin
+AddpathIfPresent ~/Dropbox/StreamDeckScripts
 AddpathIfPresent ~/Dropbox/findgrep
 AddpathIfPresent ~/bin/findgrep
 AddpathIfPresent $GIT_ROOT/product-marketing/utilities
