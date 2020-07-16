@@ -141,6 +141,7 @@ alias emx="emacs -nw"
 
 alias ww="chmod +w"
 
+alias cdd="cd ~/Downloads"
 alias cd.="cd .."
 alias cd..="cd .."
 alias cd...="cd ../.."

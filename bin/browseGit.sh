@@ -9,8 +9,8 @@ relativeDir=${PWD/#$root}
 
 echo root is $root
 
-
 url="https://github.com/${repo}/tree/${branch}$relativeDir"
+url=${url%*/tree/master}
 
 echo opening $url
 

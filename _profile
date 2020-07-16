@@ -40,7 +40,7 @@ Setenv UNIX_ENV_DIR $(dirname $pathToProfile)
 #####################################################
 # Environment Variables
 #####################################################
-
+Setenv  BASH_SILENCE_DEPRECATION_WARNING 1
 Setenv  USER             $(whoami)
 Setenv  EDITOR           emacs
 Setenv  PAGER            less
@@ -121,7 +121,6 @@ alias clean="rm *~"
 alias h="history"
 alias j="jobs"
 alias tt="exec tcsh"
-alias s="sw_sccs"
 alias xsltproc=$SW_HOME/3rdparty/sol/libxslt/1.1.12_64/bin/xsltproc
 
 sourceIfPresent "$HOME/.bashrc.bindkey"
@@ -181,15 +180,10 @@ sourceIfPresent "$HOME/.avn/bin/avn.sh"
 sourceIfPresent "$HOME/.local_env"
 
 # The next line updates PATH for the Google Cloud SDK.
-sourceIfPresent /Users/jamie/Downloads/google-cloud-sdk/path.bash.inc
+sourceIfPresent /Users/jamie.smith/google-cloud-sdk/path.bash.inc
 
 # The next line enables shell command completion for gcloud.
-sourceIfPresent /Users/jamie/Downloads/google-cloud-sdk/completion.bash.inc
-
-sourceIfPresent /Users/jamie/google-cloud-sdk/path.bash.inc
-
-# The next line enables shell command completion for gcloud.
-sourceIfPresent /Users/jamie/google-cloud-sdk/completion.bash.inc
+sourceIfPresent /Users/jamie.smith/google-cloud-sdk/completion.bash.inc
 
 if hash helm 2>/dev/null
 then
