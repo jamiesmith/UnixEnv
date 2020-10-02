@@ -196,3 +196,4 @@ alias topb="top -l 99 -n 20 -o cpu -ncols 17"
 # alias fixcanvas="pbpaste  | sed $'s@|@\\\n|@g'|pbcopy ; pbpaste"
 alias gs="git status"
 
+alias p8="ping 8.8.8.8"
