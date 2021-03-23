@@ -1,22 +1,25 @@
 #!/bin/ksh
+extension=".local"
 
-while getopts "d:" option
+while getopts "d:l" option
 do
     case $option in 
 	d)
 	    port=:$((5900+$OPTARG))
+	    ;;
+	l)
+	    # linux
+	    extension=""
 	    ;;
     esac
 done
 shift $((${OPTIND} - 1)) 
 host=$(echo $1 | sed 's|homer|krypter|g;s|marge|starbuck|g;s|.local||')
 
-extension=".local"
-
 if [[ ${host} =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]
 then
     echo "success"
     extension=""
 fi
-
+echo opening vnc://${host}${extension}${port}
 open vnc://${host}${extension}${port}

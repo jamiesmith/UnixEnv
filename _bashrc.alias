@@ -133,7 +133,7 @@ function hgrep
     history 1000 | grep "$*"
 }
 
-alias nsl="netstat -na | grep -w LISTEN"
+alias nsl="netstat -na | grep -w LISTEN| sort"
 
 alias xe="chmod +x"
 
@@ -195,5 +195,15 @@ alias be="bundle exec"
 alias topb="top -l 99 -n 20 -o cpu -ncols 17"
 # alias fixcanvas="pbpaste  | sed $'s@|@\\\n|@g'|pbcopy ; pbpaste"
 alias gs="git status"
+alias gc="git clone"
+
+alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}' -qa "
+alias dcd="docker-compose down --remove-orphans"
+alias dcu="docker-compose up --detach"
 
 alias p8="ping 8.8.8.8"
+alias p1="ping 192.168.1.1"
+alias pk="ping krypter"
+alias cqg=createQuickGIF.sh
+alias cgq=createQuickGIF.sh
+
