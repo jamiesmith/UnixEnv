@@ -260,22 +260,22 @@
 ;(load "cc-mode")
 (require 'cc-mode)
 
-(eval-when-compile
- (require 'cl))
+;; JRS-TMP (eval-when-compile
+;; JRS-TMP  (require 'cl))
 
-(defun insert-line-numbers (beg end &optional start-line)
-  "Insert line numbers into buffer."
-  (interactive "r")
-  (save-excursion
-    (let ((max (count-lines beg end))
-          (line (or start-line 1))
-          (counter 1))
-      (goto-char beg)
-      (while (<= counter max)
-        (insert (format "%0d " line))
-        (beginning-of-line 2)
-        (incf line)
-        (incf counter)))))
+;; JRS-TMP (defun insert-line-numbers (beg end &optional start-line)
+;; JRS-TMP   "Insert line numbers into buffer."
+;; JRS-TMP   (interactive "r")
+;; JRS-TMP   (save-excursion
+;; JRS-TMP     (let ((max (count-lines beg end))
+;; JRS-TMP           (line (or start-line 1))
+;; JRS-TMP           (counter 1))
+;; JRS-TMP       (goto-char beg)
+;; JRS-TMP       (while (<= counter max)
+;; JRS-TMP         (insert (format "%0d " line))
+;; JRS-TMP         (beginning-of-line 2)
+;; JRS-TMP         (incf line)
+;; JRS-TMP         (incf counter)))))
 
 (setq ksh-mode-hook
       '(lambda ()
