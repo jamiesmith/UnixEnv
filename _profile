@@ -28,6 +28,7 @@ function dotIfPresent
 sourceIfPresent "$HOME/.shell.functions"
 
 Setenv GIT_ROOT ~/Projects/GitRepo
+Setenv VAULT_ADDR https://secrets.elastic.co:8200
 # Figure out if this is a dropbox or home setup
 #
 pathToProfile=$(readlink ~/.profile)
@@ -74,6 +75,7 @@ AddpathIfPresent ~/Dropbox/findgrep
 AddpathIfPresent ~/bin/findgrep
 AddpathIfPresent $GIT_ROOT/product-marketing/utilities
 Addpath ${UNIX_ENV_DIR}/bin
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 Addpath ~/bin
 
@@ -158,6 +160,7 @@ sourceIfPresent /etc/bash_completion
 brewSourceIfPresent /etc/profile.d/bash_completion.sh
 brewSourceIfPresent etc/bash_completion
 brewSourceIfPresent etc/bash_completion.d/vagrant
+brewSourceIfPresent "Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
 
 if [ -d $HOME/go ]
 then
