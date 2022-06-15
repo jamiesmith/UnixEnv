@@ -14,7 +14,7 @@ do
     esac
 done
 shift $((${OPTIND} - 1)) 
-host=$(echo $1 | sed 's|homer|krypter|g;s|marge|starbuck|g;s|.local||')
+host=$(echo $1 | sed 's|homer|crowley|g;s|starbuck|sandcastle|g;s|.local||;s|krypter|crowley|')
 
 if [[ ${host} =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]
 then

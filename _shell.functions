@@ -90,7 +90,7 @@ function scd
 	newdir=$(echo $mydir | sed "s/$1/$2/")
 
 	echo cd $newdir
-	cd $newdir
+	cd "$newdir"
 }
 
 # http://transfer.sh
