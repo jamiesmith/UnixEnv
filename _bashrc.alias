@@ -59,8 +59,9 @@ EOT
     complete -F _$alias_name -o nospace $alias_name
 }
 
-custom_cd_alias ca $SA_DEMO_DIR
 custom_cd_alias cg $GIT_ROOT
+custom_cd_alias cgp $GIT_ROOT/grandelatte/_pages
+custom_cd_alias cgd $GIT_ROOT/ha-dashboard/dashboards
 custom_cd_alias ce $UNIX_ENV_DIR
 
 function docker_alias_completion_wrapper 

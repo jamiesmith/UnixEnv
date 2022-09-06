@@ -73,6 +73,7 @@ AddpathIfPresent /snap/bin
 AddpathIfPresent ~/Dropbox/StreamDeckScripts
 AddpathIfPresent ~/Dropbox/findgrep
 AddpathIfPresent ~/bin/findgrep
+
 AddpathIfPresent $GIT_ROOT/product-marketing/utilities
 Addpath ${UNIX_ENV_DIR}/bin
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -82,6 +83,7 @@ Addpath ~/bin
 Addpath /usr/local/bin
 AddpathIfPresent /usr/local/sbin
 AddpathIfPresent $HOME/.local/bin
+AddpathIfPresent $HOME/.rd/bin
 
 Addpath /bin 
 Addpath /usr/bin 
