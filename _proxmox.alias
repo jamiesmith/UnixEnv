@@ -47,3 +47,5 @@ alias sha256="shasum -a 256"
 alias p8="ping 8.8.8.8"
 alias p1="ping 192.168.1.1"
 alias pk="ping 192.168.1.80"
+
+bind "set completion-ignore-case on"
