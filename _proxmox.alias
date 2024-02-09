@@ -1,0 +1,49 @@
+function newf
+{
+	ls -lthF "$@" | head -25
+}
+
+function mcd
+{
+    mkdir -p $1
+    cd $1
+}
+
+function hgrep
+{
+    history 1000 | grep "$*"
+}
+
+alias new=newf
+alias h="history 10000"
+alias j="jobs -l"
+alias md="mkdir"
+alias rd="rm -r"
+alias p="more -c"
+alias me="ps -fu $USER"
+alias clean="rm -f *~ .*~"
+alias ups="usr/ucb/ps -aguxww"
+alias nsl="netstat -na | grep -w LISTEN| sort"
+alias xe="chmod +x"
+alias ww="chmod +w"
+alias cdd="cd ~/Downloads"
+alias cd.="cd .."
+alias cd..="cd .."
+alias cd...="cd ../.."
+alias cd....="cd ../../.."
+alias cd.....="cd ../../../.."
+
+# Standard LS aliases
+#
+alias ls="ls -F"
+alias l="ls -lh"
+alias la="ls -la"
+alias ll="ls -lhA"
+alias l1="ls -1"
+
+alias tg="treegrep"
+alias pbj="pbpaste | jq . --sort-keys"
+alias sha256="shasum -a 256"
+alias p8="ping 8.8.8.8"
+alias p1="ping 192.168.1.1"
+alias pk="ping 192.168.1.80"

@@ -14,9 +14,9 @@ function custom_cd_alias
 {
     local alias_name="$1"
     local alias_dir="$2"
-    if [ ! -d "$alias_dir" ]
+    if [ ! -d "${alias_dir}" ]
     then
-        echo "ERROR: Alias Dir [$alias_dir] not found for $alias_name, skipping"
+        # echo "ERROR: Alias Dir [$alias_dir] not found for $alias_name, skipping"
         return
     fi
 
@@ -62,6 +62,8 @@ EOT
 custom_cd_alias cg $GIT_ROOT
 custom_cd_alias cgp $GIT_ROOT/grandelatte/_pages
 custom_cd_alias cgd $GIT_ROOT/ha-dashboard/dashboards
+custom_cd_alias cgm $GIT_ROOT/mostlymonoastro
+custom_cd_alias cga $GIT_ROOT/astrophotography
 custom_cd_alias ce $UNIX_ENV_DIR
 
 function docker_alias_completion_wrapper 
@@ -112,7 +114,7 @@ function bulkDbgComplete
 }
 
 alias new=newf
-alias h="history 100"
+alias h="history 1000"
 alias j="jobs -l"
 
 alias pd="pushd"
@@ -199,12 +201,13 @@ alias gs="git status"
 alias gc="git clone"
 
 alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}' -qa "
+alias dil="docker image ls"
 alias dcd="docker-compose down --remove-orphans"
 alias dcu="docker-compose up --detach"
 
 alias p8="ping 8.8.8.8"
 alias p1="ping 192.168.1.1"
-alias pk="ping krypter"
+alias pk="ping 192.168.1.80"
 alias cqg=createQuickGIF.sh
 alias cgq=createQuickGIF.sh
 

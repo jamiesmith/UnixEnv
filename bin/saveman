@@ -1,11 +1,15 @@
-#!/bin/ksh
+#!/bin/bash
 
-while getopts "s:" option
+force=""
+while getopts "fs:" option
 do
 	case $option in
-		s)
-			section="-s $OPTARG"
-			;;
+	    f)
+		force="yes"
+		;;
+	    s)
+		section="-s $OPTARG"
+		;;
 	esac
 done
 
@@ -17,7 +21,7 @@ DIR=$HOME/Dropbox/shared/mantext
 mkdir -p $DIR
 
 file=$DIR/$1
-
+[ -n "$force" ] && rm -f "$file"
 if [ ! -f $file ]
 then
 	man $section $1 | col -b > $file
