@@ -162,6 +162,7 @@ sourceIfPresent /usr/share/bash-completion/completions/docker
 brewSourceIfPresent etc/profile.d/bash_completion.sh
 brewSourceIfPresent etc/bash_completion
 brewSourceIfPresent "Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
+sourceIfPresent ~/Projects/GitRepo/snyk-cli-completion/snyk-cli-completion.bash
 
 if [ -d $HOME/go ]
 then
