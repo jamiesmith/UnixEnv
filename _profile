@@ -130,7 +130,7 @@ alias tt="exec tcsh"
 alias xsltproc=$SW_HOME/3rdparty/sol/libxslt/1.1.12_64/bin/xsltproc
 
 sourceIfPresent "$HOME/.bashrc.bindkey"
-dotIfPresent "$HOME/.bashrc.alias"
+sourceIfPresent "$HOME/.bashrc.alias"
 
 # There's some weirdness going on - can't have this check inside the if.
 #
@@ -161,7 +161,6 @@ sourceIfPresent /etc/bash_completion
 sourceIfPresent /usr/share/bash-completion/completions/docker
 brewSourceIfPresent etc/profile.d/bash_completion.sh
 brewSourceIfPresent etc/bash_completion
-brewSourceIfPresent etc/bash_completion.d/vagrant
 brewSourceIfPresent "Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc"
 
 if [ -d $HOME/go ]
@@ -171,8 +170,6 @@ then
     AddpathIfPresent $GOBIN
     AddpathIfPresent /usr/local/opt/go/libexec/bin
 fi
-
-Setenv VAGRANT_DEFAULT_PROVIDER vmware_fusion
 
 Setenv NVM_DIR "$HOME/.nvm"
 sourceIfPresent "$NVM_DIR/nvm.sh"
@@ -188,16 +185,10 @@ sourceIfPresent "$HOME/.local_env"
 # The next line updates PATH for the Google Cloud SDK.
 sourceIfPresent /Users/jamie.smith/google-cloud-sdk/path.bash.inc
 
-
-# JRS-TMP if hash helm 2>/dev/null
-# JRS-TMP then
-# JRS-TMP     echo setting up helm completion
-# JRS-TMP     source <(helm completion bash)
-# JRS-TMP fi
-
-if hash mcfly 2>/dev/null
-then
-    eval "$(mcfly init bash)"
-fi
+# initialize these if the commands are found
+#
+command -v helm   > /dev/null 2>&1 && source <(helm completion bash)
+command -v mcfly  > /dev/null 2>&1 && eval "$(mcfly init bash)"
+command -v direnv > /dev/null 2>&1 && eval "$(direnv hook bash)"
 
 sourceIfPresent "$HOME/.cargo/env"

@@ -94,7 +94,7 @@
 (add-to-list 'load-path (expand-file-name "~/Dropbox/UnixEnv/EmacsEnv/utils"))
 (add-to-list 'load-path (expand-file-name "~/.emacsEnv/utils"))
 
-(autoload 'ksh-mode "ksh-mode" "Mode for lots more shells." t)
+;; (autoload 'ksh-mode "ksh-mode" "Mode for lots more shells." t)
 (autoload 'yaml-mode "yaml-mode" "Yaml mode." t)
 (autoload 'ruby-mode "ruby-mode" "Mode for ruby" t)
 
