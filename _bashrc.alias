@@ -204,6 +204,7 @@ alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}' -a "
 alias dil="docker image ls"
 alias dcd="docker-compose down --remove-orphans"
 alias dcu="docker-compose up --detach"
+alias dcdu="docker-compose down && docker-compose up --detach"
 
 alias p8="ping 8.8.8.8"
 alias p1="ping 192.168.1.1"
