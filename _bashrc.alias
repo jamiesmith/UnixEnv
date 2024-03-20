@@ -210,4 +210,3 @@ alias p1="ping 192.168.1.1"
 alias pk="ping 192.168.1.80"
 alias cqg=createQuickGIF.sh
 alias cgq=createQuickGIF.sh
-

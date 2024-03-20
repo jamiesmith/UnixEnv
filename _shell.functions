@@ -170,10 +170,10 @@ function fsj
 	tmpfile=$(mktemp)
 	jq . "$file" > $tmpfile
 	if [ $? -eq 0 ]
-	then
-	    mv $tmpfile "$file"
-	else
-	    echo "JQ Failed"
-	fi
+    	then
+    	    mv $tmpfile "$file"
+    	else
+    	    echo "JQ Failed"
+    	fi
     fi
 }

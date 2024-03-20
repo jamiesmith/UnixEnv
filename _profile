@@ -81,7 +81,8 @@ command -v brew > /dev/null 2>&1 && eval "$(brew shellenv)"
 
 Addpath ~/bin
 
-Addpath /usr/local/bin
+AddpathIfPresent /usr/local/bin
+AddpathIfPresent /opt/homebrew/bin
 AddpathIfPresent /usr/local/sbin
 AddpathIfPresent $HOME/.local/bin
 AddpathIfPresent $HOME/.rd/bin
@@ -134,10 +135,10 @@ sourceIfPresent "$HOME/.bashrc.alias"
 
 # There's some weirdness going on - can't have this check inside the if.
 #
-if hash rbenv 2>/dev/null
-then
-    eval "$(rbenv init -)"
-fi
+# if hash rbenv 2>/dev/null
+# then
+#     eval "$(rbenv init -)"
+# fi
 
 bind "set completion-ignore-case on"
 bind "set show-all-if-ambiguous on"
@@ -191,5 +192,5 @@ sourceIfPresent /Users/jamie.smith/google-cloud-sdk/path.bash.inc
 command -v helm   > /dev/null 2>&1 && source <(helm completion bash)
 command -v mcfly  > /dev/null 2>&1 && eval "$(mcfly init bash)"
 command -v direnv > /dev/null 2>&1 && eval "$(direnv hook bash)"
-
+command -v rbenv  > /dev/null 2>&1 && eval "$(rbenv init -)"
 sourceIfPresent "$HOME/.cargo/env"
