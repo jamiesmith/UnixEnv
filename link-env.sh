@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TARGET_LOC="${HOME}"
+TARGET_LOC="${TARGET_LOC:-$HOME}"
 
 if [ -z "${TARGET_LOC}" ]
 then
