@@ -1,6 +1,11 @@
 #!/bin/bash
 
-TARGET_LOC="${TARGET_LOC:-$HOME}"
+if [ -n "$1" ]
+then
+    TARGET_LOC="$1"
+else
+    TARGET_LOC="${HOME}"
+fi
 
 if [ -z "${TARGET_LOC}" ]
 then
