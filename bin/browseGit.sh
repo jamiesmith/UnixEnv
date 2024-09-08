@@ -12,6 +12,11 @@ do
 done
 shift $((${OPTIND} - 1)) 
 
+if [ "$(uname)" != "Darwin" ]
+then
+    quiet="yep"
+fi
+
 branch=$(git rev-parse --abbrev-ref HEAD)
 repo=$(git config --get remote.origin.url | sed 's|git@github.com:||; s|https://github.com/||; s|.git$||')
 repo=$(git config --get remote.origin.url | sed 's|git@github.com:|https://github.com/|;  s|.git$||')
