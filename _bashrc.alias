@@ -207,6 +207,7 @@ alias dcu="docker compose up --detach --force-recreate --remove-orphans"
 alias dcdu="docker-compose down && docker-compose up --detach"
 
 alias p8="ping 8.8.8.8"
+alias p5="ping 192.168.1.5"
 alias p1="ping 192.168.1.1"
 alias pk="ping 192.168.1.80"
 alias cqg=createQuickGIF.sh
