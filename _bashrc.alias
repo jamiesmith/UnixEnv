@@ -65,6 +65,7 @@ custom_cd_alias cgd $GIT_ROOT/ha-dashboard/dashboards
 custom_cd_alias cgm $GIT_ROOT/mostlymonoastro
 custom_cd_alias cga $GIT_ROOT/astrophotography
 custom_cd_alias ce $UNIX_ENV_DIR
+custom_cd_alias ca /Volumes/Astrophotography/AstroImages
 
 function docker_alias_completion_wrapper 
 {
@@ -212,3 +213,4 @@ alias p1="ping 192.168.1.1"
 alias pk="ping 192.168.1.80"
 alias cqg=createQuickGIF.sh
 alias cgq=createQuickGIF.sh
+alias iap="importAstroPhotos.sh -d"
