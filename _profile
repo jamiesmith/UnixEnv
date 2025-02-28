@@ -28,6 +28,8 @@ function dotIfPresent
 sourceIfPresent "$HOME/.shell.functions"
 
 Setenv GIT_ROOT ~/Projects/GitRepo
+Setenv ASTRO_IMAGE_ROOT /Volumes/Astrophotography/AstroImages
+
 # Figure out if this is a dropbox or home setup
 #
 pathToProfile=$(readlink ~/.profile)
@@ -130,6 +132,7 @@ alias j="jobs"
 alias tt="exec tcsh"
 alias xsltproc=$SW_HOME/3rdparty/sol/libxslt/1.1.12_64/bin/xsltproc
 
+sourceIfPresent "$HOME/.profile.local"
 sourceIfPresent "$HOME/.bashrc.bindkey"
 sourceIfPresent "$HOME/.bashrc.alias"
 

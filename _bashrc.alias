@@ -65,7 +65,7 @@ custom_cd_alias cgd $GIT_ROOT/ha-dashboard/dashboards
 custom_cd_alias cgm $GIT_ROOT/mostlymonoastro
 custom_cd_alias cga $GIT_ROOT/astrophotography
 custom_cd_alias ce $UNIX_ENV_DIR
-custom_cd_alias ca /Volumes/Astrophotography/AstroImages
+custom_cd_alias ca $ASTRO_IMAGE_ROOT
 
 function docker_alias_completion_wrapper 
 {
