@@ -162,6 +162,7 @@ complete -F _ssh vnc
 sourceIfPresent ~/.secrets
 sourceIfPresent ~/Dropbox/.secrets.env
 sourceIfPresent /etc/bash_completion
+sourceIfPresent $HOME/local_bash_completion/docker
 sourceIfPresent /usr/share/bash-completion/completions/docker
 brewSourceIfPresent etc/profile.d/bash_completion.sh
 brewSourceIfPresent etc/bash_completion
