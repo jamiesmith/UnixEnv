@@ -1,4 +1,4 @@
-#!/bin/ksh
+#!/bin/bash
 extension=".local"
 
 while getopts "d:l" option
