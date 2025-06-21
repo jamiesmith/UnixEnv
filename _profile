@@ -158,6 +158,7 @@ bind "set show-all-if-ambiguous on"
 sourceIfPresent .amazon_aws
 complete -C aws_completer aws
 complete -F _ssh vnc
+complete -F _scp fastRsync
 
 sourceIfPresent ~/.secrets
 sourceIfPresent ~/Dropbox/.secrets.env
