@@ -117,6 +117,39 @@ function transfer
 
 function usage
 {
+    local total=0
+    du -sk "$1"* 2>/dev/null | sort -nr | awk '
+    BEGIN {
+        hum[1]="K"; hum[2]="M"; hum[3]="G"; hum[4]="T";
+    }
+    {
+        sizes[NR]=$1; paths[NR]=$2;
+        total += $1;
+    }
+    END {
+        for (i = 1; i <= NR; i++) {
+            size = sizes[i];
+            unit = 1;
+            while (size >= 1024 && unit < 4) {
+                size /= 1024;
+                unit++;
+            }
+            printf "%6.1f%s\t%s\n", size, hum[unit], paths[i];
+        }
+        t = total;
+        tu = 1;
+        while (t >= 1024 && tu < 4) {
+            t /= 1024;
+            tu++;
+        }
+        printf "-----------------------------\n";
+        printf " %6.1f%s\ttotal\n", t, hum[tu];
+    }'
+}
+
+
+function usageOLD
+{
     if command -v gsort >/dev/null 2>&1
     then
 	SORT=gsort
