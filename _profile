@@ -189,8 +189,14 @@ sourceIfPresent "$HOME/.avn/bin/avn.sh"
 
 sourceIfPresent "$HOME/.local_env"
 
-# The next line updates PATH for the Google Cloud SDK.
-sourceIfPresent /Users/jamie.smith/google-cloud-sdk/path.bash.inc
+# PyEnv
+Setenv PYENV_ROOT "$HOME/.pyenv"
+if [ -d "$PYENV_ROOT" ]
+then
+    Addpath"$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init --path)"
+    eval "$(pyenv init -)"
+fi
 
 # initialize these if the commands are found
 #
