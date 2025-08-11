@@ -206,7 +206,7 @@ alias topb="top -l 99 -n 20 -o cpu -ncols 17"
 alias gs="git status"
 alias gc="git clone"
 
-alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}' -a | (read -r header && echo "$header" && sort)
+alias dps="docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}' -a | (read -r header && echo "$header" && sort)"
 
 alias dil="docker image ls"
 alias dcd="docker compose down --remove-orphans"
