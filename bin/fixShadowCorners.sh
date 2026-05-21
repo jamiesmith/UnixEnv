@@ -99,6 +99,8 @@ fi
 
 suffix=""
 
+cytacticApp="yes"
+
 while getopts "cn:s:v" option
 do
     case $option in
@@ -132,7 +134,7 @@ then
 else
     osascript -e 'display notification "Grabbing image from clipboard"'
 
-    tmpName="/tmp/foo.png"
+    tmpName="/Users/jamie/TempPictures/shadow-corners.png"
     echo "TRYING IT!"
     
     # Save it from the clipboard to a temp file
@@ -150,7 +152,7 @@ end try
 
 
 try
-	set openedFile to open for access "/tmp/foo.png" with write permission
+	set openedFile to open for access "/Users/jamie/TempPictures/shadow-corners.png" with write permission
 	write theImage to openedFile
 	close access openedFile
 on error
@@ -168,7 +170,7 @@ END
     # put it back on the clipboard
     #
     # osascript -e 'set the clipboard to POSIX file ("/tmp/foo.png")'
-    osascript -e 'set the clipboard to (read (POSIX file "/tmp/foo.png") as picture)'
+    osascript -e 'set the clipboard to (read (POSIX file "/Users/jamie/TempPictures/shadow-corners.png") as picture)'
     echo "image is back in the clipboard I think"
     osascript -e 'display notification "image is back in the clipboard I think"'
 fi

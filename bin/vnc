@@ -21,5 +21,6 @@ then
     echo "success"
     extension=""
 fi
+
 echo opening vnc://${host}${extension}${port}
 open vnc://${host}${extension}${port}

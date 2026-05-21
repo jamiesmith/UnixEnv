@@ -76,7 +76,6 @@ AddpathIfPresent ~/Dropbox/findgrep
 AddpathIfPresent ~/bin/findgrep
 AddpathIfPresent ~/Dropbox/GitRepo/astrophotography/automation
 
-
 AddpathIfPresent $GIT_ROOT/product-marketing/utilities
 Addpath ${UNIX_ENV_DIR}/bin
 command -v brew > /dev/null 2>&1 && eval "$(brew shellenv)"
@@ -88,6 +87,8 @@ AddpathIfPresent /opt/homebrew/bin
 AddpathIfPresent /usr/local/sbin
 AddpathIfPresent $HOME/.local/bin
 AddpathIfPresent $HOME/.rd/bin
+
+AddpathIfPresent /Applications/Obsidian.app/Contents/MacOS
 
 Addpath /bin 
 Addpath /usr/bin 

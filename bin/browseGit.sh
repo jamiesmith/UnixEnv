@@ -18,8 +18,8 @@ then
 fi
 
 branch=$(git rev-parse --abbrev-ref HEAD)
-repo=$(git config --get remote.origin.url | sed 's|git@github.com:||; s|https://github.com/||; s|.git$||')
-repo=$(git config --get remote.origin.url | sed 's|git@github.com:|https://github.com/|;  s|.git$||')
+# repo=$(git config --get remote.origin.url | sed 's|git@github.com:||; s|https://github.com/||; s|.git$||')
+repo=$(git config --get remote.origin.url | sed 's|^[^@]*@github\.com:|https://github.com/|;  s|.git$||')
 
 root=$(git rev-parse --show-toplevel)
 
