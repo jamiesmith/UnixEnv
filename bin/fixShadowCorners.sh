@@ -7,7 +7,6 @@ VERBOSE=""
 function die_usage
 {
     echo "Usage: $0 [-c][-n pixels to nuke][-s suffix][-v] images"
-    echo " -c Cytactic App"
     echo " -n <number of pixels> default is $nuke"
     echo " -s <suffix to add> default is $suffix"
     echo " -v verbose"
@@ -67,18 +66,7 @@ function fixImage
 
     magick "$theImage" -fill $leftFillColor  -draw "$bottomLeft"  "${name}${suffix}.$ext"
 
-    # JRS try to patch cytactic app screenshots
-    #
-    if [ -n "$cytacticApp" ]
-    then
-        echo processing cytactic app 
-        magick "$theImage" \
-          \( +clone -crop ${pixelsToNuke}x1+${widthOffset}+${heightOffset} +repage -filter point -resize ${pixelsToNuke}x${pixelsToNuke}! \) \
-          -geometry +${widthOffset}+${heightOffset} -composite \
-          "${name}${suffix}.$ext"
-    else        
-        magick "$theImage" -fill $rightFillColor -draw "$bottomRight" "${name}${suffix}.$ext"
-    fi
+    magick "$theImage" -fill $rightFillColor -draw "$bottomRight" "${name}${suffix}.$ext"
 }
 
 [ -x "$(which magick)" ] || die_usage "ERROR: You need to install imagemagick - try brew install imagemagick or the linux equivalent"
@@ -99,14 +87,9 @@ fi
 
 suffix=""
 
-cytacticApp="yes"
-
 while getopts "cn:s:v" option
 do
     case $option in
-	c)
-	    cytacticApp="yes"
-	    ;;
 	n)
 	    nuke="$OPTARG"
 	    ;;
@@ -134,7 +117,7 @@ then
 else
     osascript -e 'display notification "Grabbing image from clipboard"'
 
-    tmpName="/Users/jamie/TempPictures/shadow-corners.png"
+    tmpName="/Users/$USER/TempPictures/shadow-corners.png"
     echo "TRYING IT!"
     
     # Save it from the clipboard to a temp file
@@ -152,7 +135,7 @@ end try
 
 
 try
-	set openedFile to open for access "/Users/jamie/TempPictures/shadow-corners.png" with write permission
+	set openedFile to open for access "/Users/$USER/TempPictures/shadow-corners.png" with write permission
 	write theImage to openedFile
 	close access openedFile
 on error
@@ -170,7 +153,8 @@ END
     # put it back on the clipboard
     #
     # osascript -e 'set the clipboard to POSIX file ("/tmp/foo.png")'
-    osascript -e 'set the clipboard to (read (POSIX file "/Users/jamie/TempPictures/shadow-corners.png") as picture)'
+    # osascript -e 'set the clipboard to (read (POSIX file "/Users/$USER/TempPictures/shadow-corners.png") as picture)'
+    osascript -e 'set the clipboard to (read (POSIX file ((POSIX path of (path to home folder)) & "TempPictures/shadow-corners.png")) as picture)'
     echo "image is back in the clipboard I think"
     osascript -e 'display notification "image is back in the clipboard I think"'
 fi

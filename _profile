@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/jsmith/.docker/bin"
+# End of Docker Desktop section.
+
 #!/bin/bash
 #
 env -i
@@ -183,6 +187,8 @@ Setenv NVM_DIR "$HOME/.nvm"
 sourceIfPresent "$NVM_DIR/nvm.sh"
 sourceIfPresent "$NVM_DIR/bash_completion"
 
+[ -x "$(which cloudsmith)" ] && eval "$(_CLOUDSMITH_COMPLETE=bash_source cloudsmith)"
+
 # Automatic Version Switching for Node.js
 # This never works, but at least you know if it is off
 #
@@ -205,4 +211,5 @@ command -v helm   > /dev/null 2>&1 && source <(helm completion bash)
 command -v mcfly  > /dev/null 2>&1 && eval "$(mcfly init bash)"
 command -v direnv > /dev/null 2>&1 && eval "$(direnv hook bash)"
 command -v rbenv  > /dev/null 2>&1 && eval "$(rbenv init -)"
+command -v mise   > /dev/null 2>&1 && eval "$(mise activate bash)"
 sourceIfPresent "$HOME/.cargo/env"

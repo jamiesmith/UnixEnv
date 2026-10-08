@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t -*-
 (setq mouse-yank-at-point t)
 
 (setq initial-frame-alist '(
@@ -71,14 +72,26 @@
 (setq vc-handle-cvs nil)
 (setq vc-follow-symlinks t)
 
-(setq auto-mode-alist (cons '("\.yml$"  . yaml-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\.yaml$" . yaml-mode) auto-mode-alist))
-(setq auto-mode-alist (cons '("\.dash$" . yaml-mode) auto-mode-alist))
+;; JRS-TMP (setq auto-mode-alist (cons '("\.yml$"  . yaml-mode) auto-mode-alist))
+;; JRS-TMP (setq auto-mode-alist (cons '("\.yaml$" . yaml-mode) auto-mode-alist))
+;; JRS-TMP (setq auto-mode-alist (cons '("\.dash$" . yaml-mode) auto-mode-alist))
 
-(add-hook 'yaml-mode-hook
-    (lambda ()
-        (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+;; JRS-TMP (add-hook 'yaml-mode-hook
+;; JRS-TMP     (lambda ()
+;; JRS-TMP         (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
+;; Package setup
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+;; YAML: auto-installs on first launch, already handles .yml/.yaml
+(use-package yaml-mode
+  :ensure t
+  :mode "\\.dash\\'")
+
+;; Rules
+(add-to-list 'auto-mode-alist '("\\.rule\\'" . java-mode))
+(add-to-list 'auto-mode-alist '("\\.rulefunction\\'" . java-mode))
 (setq auto-mode-alist (cons '("\.rule$" . java-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\.rulefunction$" . java-mode) auto-mode-alist))
 (setq comment-padding " JRS-TMP ")
@@ -348,16 +361,21 @@
 ;; End of Options Menu Settings
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom -- don't edit or cut/paste it!
-  ;; Your init file should contain only one such instance.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(case-fold-search t)
  '(current-language-environment "ASCII")
  '(global-font-lock-mode t nil (font-lock))
+ '(package-selected-packages '(yaml-mode))
  '(query-user-mail-address nil)
  '(transient-mark-mode t))
 (custom-set-faces
-  ;; custom-set-faces was added by Custom -- don't edit or cut/paste it!
-  ;; Your init file should contain only one such instance.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(custom-comment-face ((((class grayscale color) (background light)) (:background "gray85" :foreground "black")))))
 
 
